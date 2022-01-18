@@ -1,42 +1,35 @@
-Sparky's Electrical Supply - Store Inventory
+Cycle Logical - Store Inventory
 
-Hand Tools
-    Linesman pliers
+Bikes - Mountain
+    Bike A
         descrip
         manufacturer
-        category
+        category Bikes
+        category Bikes --> Mountain
         price
         number-in-stock
         made in
+        size
         URL
-    Tape measure
-        Lufkin
-    Wire strippers
-    Side cutters
-        Klein
-    Knife
-Power Tools
-    Drill
-        Milwaukee
-        Dewalt
-Lighting
-    Fixtures
-    Bulbs
-Wire
-    14/2 loomex
-    12/2 loomex
-    thermostat wire
-Panels
-    lighting panel
-        Square D
+    Bike B
+        Giant
+    Bike C
+    Bike D
+        Rocky Mountain
+    Bike E
+        Trek
+Bikes - Road
+    Bike A
+    Bike B
+Tires
+    
 Safety
-    safety glasses
+    helmets
+    gloves
 Misc
-    marrettes
-        Thomas & Betts
-    staples
-    tape Super 88
-    safety glasses
+    gloves
+    Camelbak
+    water bottles
 
 ---
 Category
