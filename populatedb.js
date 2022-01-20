@@ -106,7 +106,7 @@ function categoryCreate(name, cb) {
 }
 
 function createItems(cb) {
-  async.series(
+  async.parallel(
     [
       function (callback) {
         itemCreate(
@@ -235,7 +235,7 @@ function createItems(cb) {
 }
 
 function createManufacturers(cb) {
-  async.parallel(
+  async.series(
     [
       function (callback) {
         manufacturerCreate(
@@ -308,7 +308,7 @@ function createManufacturers(cb) {
 }
 
 function createMadeIns(cb) {
-  async.parallel(
+  async.series(
     [
       function (callback) {
         made_inCreate("Taiwan", callback);
@@ -328,7 +328,7 @@ function createMadeIns(cb) {
   );
 }
 function createCategories(cb) {
-  async.parallel(
+  async.series(
     [
       function (callback) {
         categoryCreate("Mountain Bikes", callback);
@@ -352,7 +352,7 @@ function createCategories(cb) {
 }
 
 async.series(
-  [createItems, createManufacturers, createMadeIns, createCategories],
+  [createManufacturers, createMadeIns, createCategories, createItems],
   // Optional callback
   function (err, results) {
     if (err) {

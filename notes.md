@@ -41,9 +41,9 @@ Made In
 
 **Item**
 name: String
+description: String
 manufacturer: Manufacturer[1]
 made_in: Made In[1]
-description: String
 category: Category[1..*]
 price: Number
 number_in_stock: Number
@@ -51,8 +51,8 @@ URL: String
 
 **Manufacturer**
 name: String
-established: Date
 description: String
+established: Date
 URL: String
 
 **Made In**

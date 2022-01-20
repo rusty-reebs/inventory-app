@@ -9,7 +9,7 @@ var usersRouter = require("./routes/users");
 
 var mongoose = require("mongoose");
 var mongoDB =
-  "mongodb+srv://rusty:<password>@cluster0.l9n3t.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+  "mongodb+srv://rusty:justgiver7@cluster0.l9n3t.mongodb.net/inventory_app?retryWrites=true&w=majority";
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 var db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
