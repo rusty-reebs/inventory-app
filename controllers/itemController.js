@@ -25,7 +25,7 @@ exports.index = function (req, res) {
     },
     function (err, results) {
       res.render("index", {
-        title: "Cycle Logical - Store Inventory",
+        title: "Store Inventory",
         error: err,
         data: results,
       });
@@ -36,7 +36,7 @@ exports.index = function (req, res) {
 exports.item_list = function (req, res, next) {
   Item.find(
     {},
-    "name category manufacturer description price made_in number_in_stock"
+    "name category manufacturer description price made_in number_in_stock img"
   )
     .sort({ category: 1 })
     .populate("manufacturer")
@@ -50,8 +50,16 @@ exports.item_list = function (req, res, next) {
     });
 };
 
-exports.item_detail = function (req, res) {
-  res.send("NOT IMPLEMENTED");
+exports.item_detail = function (req, res, next) {
+  Item.findById(req.params.id)
+    .populate("manufacturer")
+    .populate("category")
+    .exec(function (err, item_details) {
+      if (err) {
+        return next(err);
+      }
+      res.render("item-detail", { item_details: item_details });
+    });
 };
 
 exports.item_create_get = function (req, res) {

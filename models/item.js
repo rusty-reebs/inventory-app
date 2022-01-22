@@ -14,6 +14,7 @@ var ItemSchema = new Schema({
   category: [{ type: Schema.Types.ObjectId, ref: "Category", required: true }],
   price: { type: Number, required: true },
   number_in_stock: { type: Number, required: true },
+  img: { type: String, maxLength: 100 },
 });
 
 ItemSchema.virtual("url").get(function () {
