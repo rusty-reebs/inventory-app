@@ -49,7 +49,7 @@ router.post(
   manufacturer_controller.manufacturer_update_post
 );
 router.get("/manufacturer/:id", manufacturer_controller.manufacturer_detail);
-router.post("/manufacturers", manufacturer_controller.manufacturer_list);
+router.get("/manufacturers", manufacturer_controller.manufacturer_list);
 
 // Made In Routes
 

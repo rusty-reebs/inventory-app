@@ -3,9 +3,16 @@
   <%- include('partials/head'); -%>
   <body>
     <%- include('partials/topnav'); -%>
-    <h1><%= title %></h1>
-    <div class="container-fluid">
-    <%- include('category-card'); -%>
+    <div class="container">
+    <h1 class="text-center"><%= title %> 
+    <a href="#" class="btn btn-primary">Add new item</a></h1>
+    </div>
+    <div class="container">
+        <div class="row">
+        <% item_list.forEach((item) => { %>
+    <%- include('item-card', {item_details: item}); -%>
+      <% }) %>
+        </div>
     </div>
     <%- include('partials/footer'); -%>
     </div>
