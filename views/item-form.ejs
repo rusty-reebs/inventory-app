@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <%- include('partials/head'); -%>
+  <body>
+    <%- include('partials/topnav'); -%>
+    <div class="container">
+        <h1 class="text-center">Update Item - <%= item.manufacturer.name + " " + item.name %></h1>
+    </div>
+    <div class="container">
+        <form method="POST" action="">
+            <div class="mb-3 w-50 mx-auto">
+                <label for="item_name" class="form-label">Item</label>
+                <input type="text" class="form-control" name="item_name" id="item_name" required="true" value=<%= (undefined===item ? "" : item.name) %>>
+            </div>
+            <div class="mb-3 w-50 mx-auto">
+                <label for="item_description" class="form-label">Description</label>
+                <textarea class="form-control" rows="4" name="item_description" id="item_description" required="true" value=<%= (undefined===item ? "" : item.description) %>></textarea>
+            </div>
+            <div class="mb-3 w-50 mx-auto">
+            <div class="row">
+                <div class="col-auto">
+                    <label for="manufacturer_name" class="form-label">Manufacturer</label>
+                    <select class="form-select" aria-label="Select manufacturer">
+                        <option selected><%= item.manufacturer.name %></option>
+                        <% manufacturers.forEach((manufacturer) => { %>
+                        <option value=<%= manufacturer.name %>><%= manufacturer.name %></option>
+                        <% }) %>
+                    </select>
+                </div>
+                <div class="col-auto">
+                <label for="price" class="form-label">Price</label>
+                <input type="number" class="form-control" name="item_price" id="item_price" required="true" value=<%= (undefined===item ? "" : item.price) %>>
+                </div>
+                <div class="col-auto">
+                <label for="number_in_stock" class="form-label">Number in stock</label>
+                <input type="number" class="form-control" name="number_in_stock" id="number_in_stock" required="true" value=<%= (undefined===item ? "" : item.number_in_stock) %>>
+                </div>
+            </div>
+            </div>
+            <div class="mb-3 w-50 mx-auto">
+                <label class="form-label">Category</label><br>
+                    <% categories.forEach((category) => { %>
+                    <input type="checkbox" class="btn-check" id=<%= category._id %> name="category" value=<%= category._id %> checked=<%= category.checked %> autocomplete="off">
+                    <label class="btn btn-outline-secondary" for=<%= category._id %>><%= category.name %></label>
+                    <% }) %>
+                </select>
+            </div>
+        </form>
+    </div>
+
+  </body>

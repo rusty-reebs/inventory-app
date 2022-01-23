@@ -11,8 +11,8 @@
       <% item_details.category.forEach((category) => { %>
         <a href="#" class="btn btn-secondary btn-sm my-1"><%= category.name %></a>
         <% }) %>
-      <a href="#" class="btn btn-secondary btn-sm my-1"><%= item_details.manufacturer.name %></a>
-      <a href="#" class="btn btn-secondary btn-sm my-1"><%= item_details.made_in.name %></a>
+      <a href=<%= item_details.manufacturer.url %> class="btn btn-secondary btn-sm my-1"><%= item_details.manufacturer.name %></a>
+      <a href=<%= item_details.made_in.url %> class="btn btn-secondary btn-sm my-1"><%= item_details.made_in.name %></a>
     </div>
     </div>
 </div>

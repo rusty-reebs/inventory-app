@@ -5,12 +5,12 @@
     <%- include('partials/topnav'); -%>
     <div class="container">
         <h1 class="text-center"><%= title %>
-        <a href="/item/create" class="btn btn-secondary">Add new item</a></h1>
+        <a href="#" class="btn btn-secondary">Add new country</a></h1>
     </div>
     <div class="container">
         <div class="row gap-3 my-4">
-        <% item_list.forEach((item) => { %>
-    <%- include('item-card', {item_details: item}); -%>
+        <% made_in_list.forEach((made_in) => { %>
+    <%- include('made_in-card', {made_in_details: made_in}); -%>
       <% }) %>
         </div>
     </div>

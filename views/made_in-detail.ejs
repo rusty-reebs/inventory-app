@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <%- include('partials/head'); -%>
+  <body>
+    <%- include('partials/topnav'); -%>
+    <div class="container">
+        <h1 class="text-center"> 
+        <a href="#" class="btn btn-secondary">Update country info</a>
+        <a href="#" class="btn btn-secondary">Update country image</a>
+        <a href="#" class="btn btn-secondary">Delete country </a></h1>
+    </div>
+    <div class="container-sm">
+        <div class="card my-4 mx-auto">
+            <img src=<%= made_in_details.img %> style="max-height:20rem;object-fit:scale-down;" class="card-img-top" alt=<%= made_in_details.name %>>
+            <div class="card-body">
+                  <h5 class="card-title"><%= made_in_details.name %></h5>
+            </div>
+        </div>
+    </div>
+  </body>
