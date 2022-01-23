@@ -4,29 +4,26 @@
   <body>
     <%- include('partials/topnav'); -%>
     <div class="container">
-    <h1 class="text-center"> 
-    <a href="#" class="btn btn-primary">Update item info</a>
-    <a href="#" class="btn btn-primary">Update item image</a>
-    <a href="#" class="btn btn-primary">Delete item</a></h1>
+        <h1 class="text-center"> 
+        <a href="#" class="btn btn-secondary">Update item info</a>
+        <a href="#" class="btn btn-secondary">Update item image</a>
+        <a href="#" class="btn btn-secondary">Delete item</a></h1>
     </div>
-    <div class="container">
-        <div class="d-flex mt-5 justify-content-center">
-        <div class="card mb-3" style="max-width: 540px;">
-            <div class="row g-0">
-              <div class="col-md-4">
-                <img src=<%= item_details.img %> class="img-fluid rounded-start" alt="...">
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
+    <div class="container-sm">
+        <div class="card my-4 mx-auto">
+            <img src=<%= item_details.img %> style="max-height:20rem;object-fit:scale-down;" class="card-img-top" alt="...">
+            <div class="card-body">
                   <h5 class="card-title"><%= item_details.manufacturer.name + " " + item_details.name %></h5>
                   <p class="card-text"><%= item_details.description %></p>
-                  <p class="card-text">$<%= item_details.price %></p>
-                  <p class="card-text">Quantity: <%= item_details.number_in_stock %></p>
-                </div>
-              </div>
+                  <p class="card-text"><strong>Price: </strong>$<%= item_details.price %></p>
+                  <p class="card-text"><strong>Number in stock: </strong><%= item_details.number_in_stock %></p>
+                  <p class="card-text"><strong>Categories: </strong>
+                    <% item_details.category.forEach((category) => { %>
+                    <a href="#" class="btn btn-secondary btn-sm"><%= category.name %></a>
+                    <% }) %> </p>
+                <p class="card-text"><strong>Manufacturer: </strong><a href="#" class="btn btn-secondary btn-sm"><%= item_details.manufacturer.name %></a></p>
+                <p class="card-text"><strong>Made In: </strong><a href="#" class="btn btn-secondary btn-sm"><%= item_details.made_in.name %></a></p>
             </div>
-          </div>
         </div>
     </div>
-    <%- include('partials/footer'); -%>
   </body>

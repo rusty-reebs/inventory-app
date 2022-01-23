@@ -54,6 +54,7 @@ exports.item_detail = function (req, res, next) {
   Item.findById(req.params.id)
     .populate("manufacturer")
     .populate("category")
+    .populate("made_in")
     .exec(function (err, item_details) {
       if (err) {
         return next(err);

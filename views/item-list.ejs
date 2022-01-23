@@ -4,17 +4,15 @@
   <body>
     <%- include('partials/topnav'); -%>
     <div class="container">
-    <h1 class="text-center"><%= title %>
-    <a href="#" class="btn btn-primary">Add new item</a></h1>
+        <h1 class="text-center"><%= title %>
+        <a href="#" class="btn btn-secondary">Add new item</a></h1>
     </div>
     <div class="container">
-        <div class="row">
+        <div class="row gap-3 my-4">
         <% item_list.forEach((item) => { %>
     <%- include('item-card', {item_details: item}); -%>
       <% }) %>
         </div>
-    </div>
-    <%- include('partials/footer'); -%>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   </body>
