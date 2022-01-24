@@ -47,7 +47,7 @@ exports.item_list = function (req, res, next) {
       if (err) {
         return next(err);
       }
-      res.render("item-list", { title: "Items", item_list: list_items });
+      res.render("item-list", { title: "All Items", item_list: list_items });
     });
 };
 
@@ -64,7 +64,7 @@ exports.item_detail = function (req, res, next) {
     });
 };
 
-exports.item_create_get = function (req, res) {
+exports.item_create_get = function (req, res, next) {
   async.parallel(
     {
       manufacturers: function (callback) {
@@ -73,15 +73,19 @@ exports.item_create_get = function (req, res) {
       categories: function (callback) {
         Category.find(callback);
       },
+      made_ins: function (callback) {
+        MadeIn.find(callback);
+      },
     },
     function (err, results) {
       if (err) {
         return next(err);
       }
-      res.render("item-form", {
-        title: "Create item",
+      res.render("item-form-create", {
+        title: "Create Item",
         manufacturers: results.manufacturers,
         categories: results.categories,
+        made_ins: results.made_ins,
       });
     }
   );
@@ -151,7 +155,7 @@ exports.item_create_post = [
               results.categories[i].checked = "true";
             }
           }
-          res.render("item-form", {
+          res.render("item-form-create", {
             title: "Create item",
             manufacturers: results.manufacturers,
             categories: results.categories,
@@ -196,6 +200,9 @@ exports.item_update_get = function (req, res, next) {
       categories: function (callback) {
         Category.find(callback);
       },
+      made_ins: function (callback) {
+        MadeIn.find(callback);
+      },
     },
     function (err, results) {
       if (err) {
@@ -224,11 +231,12 @@ exports.item_update_get = function (req, res, next) {
           }
         }
       }
-      res.render("item-form", {
+      res.render("item-form-update", {
         title: "Update Item",
         manufacturers: results.manufacturers,
         categories: results.categories,
         item: results.item,
+        made_ins: results.made_ins,
       });
     }
   );

@@ -5,16 +5,33 @@
     <%- include('partials/topnav'); -%>
     <div class="container">
         <h1 class="text-center"> 
-        <a href="#" class="btn btn-secondary">Update country info</a>
+        <a href=<%= made_in.url + "/update" %> class="btn btn-secondary">Update country info</a>
         <a href="#" class="btn btn-secondary">Update country image</a>
         <a href="#" class="btn btn-secondary">Delete country </a></h1>
     </div>
     <div class="container-sm">
         <div class="card my-4 mx-auto">
-            <img src=<%= made_in_details.img %> style="max-height:20rem;object-fit:scale-down;" class="card-img-top" alt=<%= made_in_details.name %>>
+            <img src=<%= made_in.img %> style="max-height:20rem;object-fit:scale-down;" class="card-img-top" alt=<%= made_in.name %>>
             <div class="card-body">
-                  <h5 class="card-title"><%= made_in_details.name %></h5>
+                  <h5 class="card-title"><%= made_in.name %></h5>
             </div>
+        </div>
+    </div>
+    <div class="container">
+        <h5>Items made in <%= made_in.name %></h5>
+        <div class="row">
+            <% made_in_items.forEach((item) => { %>
+                <div class="col">
+                <a href=<%= item.url %> class="text-decoration-none text-reset">
+                <div class="card">
+                    <img src=<%= item.img %> style="max-height:20rem;object-fit:scale-down;" class="card-img-top" alt=<%= item.name %>>
+                    <div class="card-body">
+                        <h5 class="card-title text-center"><%= item.name %></h5>
+                    </div>
+                </div>
+                </a>
+                </div>
+                  <% }) %>
         </div>
     </div>
   </body>

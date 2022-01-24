@@ -4,24 +4,23 @@
   <body>
     <%- include('partials/topnav'); -%>
     <div class="container">
-        <h1 class="text-center">Update Item - <%= item.manufacturer.name + " " + item.name %></h1>
+        <h1 class="text-center"><%= title %></h1>
     </div>
     <div class="container">
         <form method="POST" action="">
-            <div class="mb-3 w-50 mx-auto">
+            <div class="mb-3 mx-auto">
                 <label for="item_name" class="form-label">Item</label>
-                <input type="text" class="form-control" name="item_name" id="item_name" required="true" value=<%= (undefined===item ? "" : item.name) %>>
+                <input type="text" class="form-control" name="item_name" required="true" value="">
             </div>
-            <div class="mb-3 w-50 mx-auto">
+            <div class="mb-3 mx-auto">
                 <label for="item_description" class="form-label">Description</label>
-                <textarea class="form-control" rows="4" name="item_description" id="item_description" required="true" value=<%= (undefined===item ? "" : item.description) %>></textarea>
+                <textarea class="form-control" rows="4" name="item_description" id="item_description" required="true" value=""></textarea>
             </div>
-            <div class="mb-3 w-50 mx-auto">
+            <div class="mb-3 mx-auto">
             <div class="row">
                 <div class="col-auto">
                     <label for="manufacturer_name" class="form-label">Manufacturer</label>
                     <select class="form-select" aria-label="Select manufacturer">
-                        <option selected><%= item.manufacturer.name %></option>
                         <% manufacturers.forEach((manufacturer) => { %>
                         <option value=<%= manufacturer.name %>><%= manufacturer.name %></option>
                         <% }) %>
@@ -29,22 +28,31 @@
                 </div>
                 <div class="col-auto">
                 <label for="price" class="form-label">Price</label>
-                <input type="number" class="form-control" name="item_price" id="item_price" required="true" value=<%= (undefined===item ? "" : item.price) %>>
+                <input type="number" class="form-control" name="item_price" id="item_price" required="true" value="">
                 </div>
                 <div class="col-auto">
                 <label for="number_in_stock" class="form-label">Number in stock</label>
-                <input type="number" class="form-control" name="number_in_stock" id="number_in_stock" required="true" value=<%= (undefined===item ? "" : item.number_in_stock) %>>
+                <input type="number" class="form-control" name="number_in_stock" id="number_in_stock" required="true" value="">
+                </div>
+                <div class="col-auto">
+                    <label for="made_in" class="form-label">Made In</label>
+                    <select class="form-select" aria-label="Select country">
+                        <% made_ins.forEach((made_in) => { %>
+                        <option value=<%= made_in.name %>><%= made_in.name %></option>
+                        <% }) %>
+                    </select>
                 </div>
             </div>
             </div>
-            <div class="mb-3 w-50 mx-auto">
+            <div class="mb-3 mx-auto">
                 <label class="form-label">Category</label><br>
                     <% categories.forEach((category) => { %>
-                    <input type="checkbox" class="btn-check" id=<%= category._id %> name="category" value=<%= category._id %> checked=<%= category.checked %> autocomplete="off">
+                    <input type="checkbox" class="btn-check" id=<%= category._id %> name="category" value=<%= category._id %> autocomplete="off">
                     <label class="btn btn-outline-secondary" for=<%= category._id %>><%= category.name %></label>
                     <% }) %>
                 </select>
             </div>
+            <button class="btn btn-secondary" type="submit">Submit</button>
         </form>
     </div>
 

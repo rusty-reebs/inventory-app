@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <%- include('partials/head'); -%>
+  <body>
+    <%- include('partials/topnav'); -%>
+    <div class="container">
+        <h1 class="text-center"><%= title %></h1>
+    </div>
+    <div class="container">
+        <form method="POST" action="">
+            <div class="mb-3 mx-auto">
+                <label for="category_name" class="form-label">Category</label>
+                <input type="text" class="form-control" name="category_name" required="true" value=<%= category.name %>>
+            </div>
+            <button class="btn btn-secondary" type="submit">Submit</button>
+        </form>
+    </div>
+  </body>

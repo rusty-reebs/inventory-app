@@ -5,18 +5,35 @@
     <%- include('partials/topnav'); -%>
     <div class="container">
         <h1 class="text-center"> 
-        <a href="#" class="btn btn-secondary">Update manufacturer info</a>
+        <a href=<%= manufacturer.url + "/update" %> class="btn btn-secondary">Update manufacturer info</a>
         <a href="#" class="btn btn-secondary">Update manufacturer image</a>
         <a href="#" class="btn btn-secondary">Delete manufacturer</a></h1>
     </div>
     <div class="container-sm">
         <div class="card my-4 mx-auto">
-            <img src=<%= manufacturer_details.img %> style="max-height:20rem;object-fit:scale-down;" class="card-img-top" alt=<%= manufacturer_details.name %>>
+            <img src=<%= manufacturer.img %> style="max-height:20rem;object-fit:scale-down;" class="card-img-top" alt=<%= manufacturer.name %>>
             <div class="card-body">
-                  <h5 class="card-title"><%= manufacturer_details.name %></h5>
-                  <p class="card-text"><%= manufacturer_details.description %></p>
-                  <p class="card-text"><strong>Established: </strong><%= manufacturer_details.established %></p>
+                  <h5 class="card-title"><%= manufacturer.name %></h5>
+                  <p class="card-text"><%= manufacturer.description %></p>
+                  <p class="card-text"><strong>Established: </strong><%= manufacturer.established %></p>
             </div>
+        </div>
+    </div>
+    <div class="container">
+        <h5>Items made by <%= manufacturer.name %></h5>
+        <div class="row">
+            <% manufacturer_items.forEach((item) => { %>
+                <div class="col">
+                <a href=<%= item.url %> class="text-decoration-none text-reset">
+                <div class="card">
+                    <img src=<%= item.img %> style="max-height:20rem;object-fit:scale-down;" class="card-img-top" alt=<%= item.name %>>
+                    <div class="card-body">
+                        <h5 class="card-title text-center"><%= item.name %></h5>
+                    </div>
+                </div>
+                </a>
+                </div>
+                  <% }) %>
         </div>
     </div>
   </body>

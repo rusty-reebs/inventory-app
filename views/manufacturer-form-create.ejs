@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <%- include('partials/head'); -%>
+  <body>
+    <%- include('partials/topnav'); -%>
+    <div class="container">
+        <h1 class="text-center"><%= title %></h1>
+    </div>
+    <div class="container">
+        <form method="POST" action="">
+            <div class="mb-3 mx-auto">
+                <label for="item_name" class="form-label">Manufacturer</label>
+                <input type="text" class="form-control" name="manufacturer_name" required="true" value="">
+            </div>
+            <div class="mb-3 mx-auto">
+                <label for="item_description" class="form-label">Description</label>
+                <textarea class="form-control" rows="4" name="manufacturer_description" id="manufacturer_description" required="true" value=""></textarea>
+            </div>
+            <div class="mb-3 mx-auto">
+            <div class="row">
+                <div class="col-auto">
+                <label for="price" class="form-label">Established</label>
+                <input type="number" class="form-control" name="manufacturer_established" id="manufacturer_established" required="true" value="">
+                </div>
+            </div>
+            </div>
+            <button class="btn btn-secondary" type="submit">Submit</button>
+        </form>
+    </div>
+  </body>
