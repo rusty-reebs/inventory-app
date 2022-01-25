@@ -100,28 +100,28 @@ exports.item_create_post = [
     }
     next();
   },
-  body("name", "Name must not be empty.").trim().isLength({ min: 1 }).escape(),
-  body("description", "Description must not be empty.")
-    .trim()
-    .isLength({ min: 1 })
-    .escape(),
-  body("manufacturer", "Manufacturer must not be empty.")
-    .trim()
-    .isLength({ min: 1 })
-    .escape(),
-  body("made_in", "Made In must not be empty.")
-    .trim()
-    .isLength({ min: 1 })
-    .escape(),
-  body("price", "Price must not be empty.")
-    .trim()
-    .isLength({ min: 1 })
-    .escape(),
-  body("number_in_stock", "Number in stock must not be empty.")
-    .trim()
-    .isLength({ min: 1 })
-    .escape(),
-  body("category.*").escape(),
+  //   body("name", "Name must not be empty.").trim().isLength({ min: 1 }).escape(),
+  //   body("description", "Description must not be empty.")
+  //     .trim()
+  //     .isLength({ min: 1 })
+  //     .escape(),
+  //   body("manufacturer", "Manufacturer must not be empty.")
+  //     .trim()
+  //     .isLength({ min: 1 })
+  //     .escape(),
+  //   body("made_in", "Made In must not be empty.")
+  //     .trim()
+  //     .isLength({ min: 1 })
+  //     .escape(),
+  //   body("price", "Price must not be empty.")
+  //     .trim()
+  //     .isLength({ min: 1 })
+  //     .escape(),
+  //   body("number_in_stock", "Number in stock must not be empty.")
+  //     .trim()
+  //     .isLength({ min: 1 })
+  //     .escape(),
+  //   body("category.*").escape(),
 
   (req, res, next) => {
     const errors = validationResult(req);

@@ -20,9 +20,9 @@
             <div class="row">
                 <div class="col-auto">
                     <label for="manufacturer" class="form-label">Manufacturer</label>
-                    <select class="form-select" aria-label="Select manufacturer">
+                    <select class="form-select" name="manufacturer" aria-label="Select manufacturer" required="true">
                         <% manufacturers.forEach((manufacturer) => { %>
-                        <option name="manufacturer" value=""><%= manufacturer.name %></option>
+                        <option value="<%= manufacturer._id %>"><%= manufacturer.name %></option>
                         <% }) %>
                     </select>
                 </div>
@@ -36,9 +36,9 @@
                 </div>
                 <div class="col-auto">
                     <label for="made_in" class="form-label">Made In</label>
-                    <select class="form-select" aria-label="Select country">
+                    <select class="form-select" name="made_in" aria-label="Select country" required="true">
                         <% made_ins.forEach((made_in) => { %>
-                        <option name="made_in" value=""><%= made_in.name %></option>
+                        <option value="<%= made_in._id %>"><%= made_in.name %></option>
                         <% }) %>
                     </select>
                 </div>
