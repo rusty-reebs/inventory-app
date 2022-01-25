@@ -9,7 +9,7 @@
       <p class="card-text"><strong>Number in stock: </strong><%= item_details.number_in_stock %></p>
       <div class="mt-2">
       <% item_details.category.forEach((category) => { %>
-        <a href="#" class="btn btn-secondary btn-sm my-1"><%= category.name %></a>
+        <a href=<%= category.url %> class="btn btn-secondary btn-sm my-1"><%= category.name %></a>
         <% }) %>
       <a href=<%= item_details.manufacturer.url %> class="btn btn-secondary btn-sm my-1"><%= item_details.manufacturer.name %></a>
       <a href=<%= item_details.made_in.url %> class="btn btn-secondary btn-sm my-1"><%= item_details.made_in.name %></a>

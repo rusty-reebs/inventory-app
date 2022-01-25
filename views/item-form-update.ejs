@@ -9,22 +9,24 @@
     <div class="container">
         <form method="POST" action="">
             <div class="mb-3 mx-auto">
-                <label for="item_name" class="form-label">Item</label>
-                <input type="text" class="form-control" name="item_name" required="true" value=<%= item.name %>>
+                <label for="name" class="form-label">Item</label>
+                <input type="text" class="form-control" name="name" required="true" value=<%= item.name %>>
             </div>
             <div class="mb-3 mx-auto">
-                <label for="item_description" class="form-label">Description</label>
-                <textarea class="form-control" rows="4" name="item_description" id="item_description" required="true"><%= item.description %></textarea>
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control" rows="4" name="description" required="true"><%= item.description %></textarea>
             </div>
             <div class="mb-3 mx-auto">
             <div class="row">
                 <div class="col-auto">
-                    <label for="manufacturer_name" class="form-label">Manufacturer</label>
-                    <select class="form-select" aria-label="Select manufacturer">
-                        <option selected><%= item.manufacturer.name %></option>
+                    <label for="manufacturer" class="form-label">Manufacturer</label>
+                    <select type="select" class="form-select" name="manufacturer" aria-label="Select manufacturer">
                         <% manufacturers.forEach((manufacturer) => { %>
-                            <% if (manufacturer.name !== item.manufacturer.name) { %>
-                        <option value=<%= manufacturer.name %>><%= manufacturer.name %></option>
+                            <% if (typeof item != "undefined") { %>
+                                <% var selected = (manufacturer._id.toString() === item.manufacturer._id.toString() || manufacturer._id.toString() === item.manufacturer) ? "selected" : "" %>
+                                <option value="<%= manufacturer._id %>" <%= selected %>><%= manufacturer.name %></option>
+                                <% } else { %>
+                                <option value="<%= manufacturer._id %>"><%= manufacturer.name %></option> 
                             <% } %>
                         <% }) %>
                     </select>
@@ -59,6 +61,13 @@
             </div>
             <button class="btn btn-secondary" type="submit">Submit</button>
         </form>
+        <% if (typeof errors != "undefined") { %>
+            <ul>
+                <% errors.forEach((error) => { %>
+                <li><%= error.msg %></li>
+                <% }) %>
+            </ul>
+        <% } %>
     </div>
 
   </body>

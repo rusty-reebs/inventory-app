@@ -9,36 +9,36 @@
     <div class="container">
         <form method="POST" action="">
             <div class="mb-3 mx-auto">
-                <label for="item_name" class="form-label">Item</label>
-                <input type="text" class="form-control" name="item_name" required="true" value="">
+                <label for="name" class="form-label">Item</label>
+                <input type="text" class="form-control" name="name" required="true" value="">
             </div>
             <div class="mb-3 mx-auto">
-                <label for="item_description" class="form-label">Description</label>
-                <textarea class="form-control" rows="4" name="item_description" id="item_description" required="true" value=""></textarea>
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control" rows="4" name="description" required="true"></textarea>
             </div>
             <div class="mb-3 mx-auto">
             <div class="row">
                 <div class="col-auto">
-                    <label for="manufacturer_name" class="form-label">Manufacturer</label>
+                    <label for="manufacturer" class="form-label">Manufacturer</label>
                     <select class="form-select" aria-label="Select manufacturer">
                         <% manufacturers.forEach((manufacturer) => { %>
-                        <option value=<%= manufacturer.name %>><%= manufacturer.name %></option>
+                        <option name="manufacturer" value=""><%= manufacturer.name %></option>
                         <% }) %>
                     </select>
                 </div>
                 <div class="col-auto">
                 <label for="price" class="form-label">Price</label>
-                <input type="number" class="form-control" name="item_price" id="item_price" required="true" value="">
+                <input type="number" class="form-control" name="price" required="true" value="">
                 </div>
                 <div class="col-auto">
                 <label for="number_in_stock" class="form-label">Number in stock</label>
-                <input type="number" class="form-control" name="number_in_stock" id="number_in_stock" required="true" value="">
+                <input type="number" class="form-control" name="number_in_stock" required="true" value="">
                 </div>
                 <div class="col-auto">
                     <label for="made_in" class="form-label">Made In</label>
                     <select class="form-select" aria-label="Select country">
                         <% made_ins.forEach((made_in) => { %>
-                        <option value=<%= made_in.name %>><%= made_in.name %></option>
+                        <option name="made_in" value=""><%= made_in.name %></option>
                         <% }) %>
                     </select>
                 </div>
@@ -47,10 +47,9 @@
             <div class="mb-3 mx-auto">
                 <label class="form-label">Category</label><br>
                     <% categories.forEach((category) => { %>
-                    <input type="checkbox" class="btn-check" id=<%= category._id %> name="category" value=<%= category._id %> autocomplete="off">
+                    <input type="checkbox" name="category" class="btn-check" autocomplete="off" value=<%= category._id %> id=<%= category._id %>>
                     <label class="btn btn-outline-secondary" for=<%= category._id %>><%= category.name %></label>
                     <% }) %>
-                </select>
             </div>
             <button class="btn btn-secondary" type="submit">Submit</button>
         </form>

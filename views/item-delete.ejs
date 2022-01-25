@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <%- include('partials/head'); -%>
+  <body>
+    <%- include('partials/topnav'); -%>
+    <div class="container">
+        <h1 class="text-center"><%= title %></h1>
+    </div>
+    <div class="container">
+        <p>Do you really want to delete this item?</p>
+        <div class="container">
+            <form method="POST" action="">
+                <input type="hidden" class="form-control" name="itemid" required="true" value=<%= item._id %>>
+                <button class="btn btn-secondary" type="submit">Delete</button>
+            </form>
+        </div>
+    </div>
+  </body>

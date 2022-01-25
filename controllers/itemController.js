@@ -125,6 +125,7 @@ exports.item_create_post = [
 
   (req, res, next) => {
     const errors = validationResult(req);
+    console.log(errors);
 
     let item = new Item({
       name: req.body.name,
@@ -145,6 +146,9 @@ exports.item_create_post = [
           categories: function (callback) {
             Category.find(callback);
           },
+          made_ins: function (callback) {
+            MadeIn.find(callback);
+          },
         },
         function (err, results) {
           if (err) {
@@ -156,9 +160,10 @@ exports.item_create_post = [
             }
           }
           res.render("item-form-create", {
-            title: "Create item",
+            title: "Create Item",
             manufacturers: results.manufacturers,
             categories: results.categories,
+            made_ins: results.made_ins,
             item: item,
             errors: errors.array(),
           });
@@ -166,8 +171,9 @@ exports.item_create_post = [
       );
       return;
     } else {
-      book.save(function (err) {
+      item.save(function (err) {
         if (err) {
+          console.log(err);
           return next(err);
         }
         res.redirect(item.url);
@@ -176,11 +182,32 @@ exports.item_create_post = [
   },
 ];
 
-exports.item_delete_get = function (req, res) {
-  res.send("NOT IMPLEMENTED");
+exports.item_delete_get = function (req, res, next) {
+  Item.findById(req.params.id).exec(function (err, results) {
+    if (err) {
+      return next(err);
+    }
+    if (results == null) {
+      res.redirect("/items");
+    }
+    res.render("item-delete", {
+      title: "Delete Item",
+      item: results,
+    });
+  });
 };
-exports.item_delete_post = function (req, res) {
-  res.send("NOT IMPLEMENTED");
+exports.item_delete_post = function (req, res, next) {
+  Item.findById(req.params.id).exec(function (err, results) {
+    if (err) {
+      return next(err);
+    }
+    Item.findByIdAndRemove(req.body.id, function deleteItem(err) {
+      if (err) {
+        return next(err);
+      }
+      res.redirect("/items");
+    });
+  });
 };
 
 exports.item_update_get = function (req, res, next) {
@@ -242,6 +269,92 @@ exports.item_update_get = function (req, res, next) {
   );
 };
 
-exports.item_update_post = function (req, res) {
-  res.send("NOT IMPLEMENTED");
-};
+exports.item_update_post = [
+  (req, res, next) => {
+    if (!(req.body.category instanceof Array)) {
+      if (typeof req.body.category === "undefined") {
+        req.body.category = [];
+      } else {
+        req.body.category = new Array(req.body.category);
+      }
+    }
+    next();
+  },
+  //   body("name", "Name must not be empty.").trim().isLength({ min: 1 }).escape(),
+  //   body("description", "Description must not be empty.")
+  //     .trim()
+  //     .isLength({ min: 1 })
+  //     .escape(),
+  //   body("manufacturer", "Manufacturer must not be empty.")
+  //     .trim()
+  //     .isLength({ min: 1 })
+  //     .escape(),
+  //   body("made_in", "Made In must not be empty.")
+  //     .trim()
+  //     .isLength({ min: 1 })
+  //     .escape(),
+  //   body("price", "Price must not be empty.").trim().isInt({ min: 1 }).escape(),
+  //   body("number_in_stock", "Number in stock must not be empty.")
+  //     .trim()
+  //     .isInt({ min: 1 })
+  //     .escape(),
+  //   body("category.*").escape(),
+
+  (req, res, next) => {
+    let errors = validationResult(req);
+    console.log(errors);
+
+    let item = new Item({
+      name: req.body.name,
+      description: req.body.description,
+      manufacturer: req.body.manufacturer,
+      made_in: req.body.made_in,
+      price: req.body.price,
+      number_in_stock: req.body.number_in_stock,
+      category:
+        typeof req.body.category === "undefined" ? [] : req.body.category,
+      _id: req.params.id,
+    });
+    if (!errors.isEmpty()) {
+      async.parallel(
+        {
+          manufacturers: function (callback) {
+            Manufacturer.find(callback);
+          },
+          categories: function (callback) {
+            Category.find(callback);
+          },
+          made_ins: function (callback) {
+            MadeIn.find(callback);
+          },
+        },
+        function (err, results) {
+          if (err) {
+            return next(err);
+          }
+          for (let i = 0; i < results.categories.length; i++) {
+            if (item.category.indexOf(results.categories[i]._id) > -1) {
+              results.categories[i].checked = "true";
+            }
+          }
+          res.render("item-form-update", {
+            title: "Update Item",
+            manufacturers: results.manufacturers,
+            categories: results.categories,
+            made_ins: results.made_ins,
+            item: item,
+            errors: errors.array(),
+          });
+        }
+      );
+      return;
+    } else {
+      Item.findByIdAndUpdate(req.params.id, item, {}, function (err, the_item) {
+        if (err) {
+          return next(err);
+        }
+        res.redirect(the_item.url);
+      });
+    }
+  },
+];

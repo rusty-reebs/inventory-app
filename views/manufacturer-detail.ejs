@@ -6,8 +6,8 @@
     <div class="container">
         <h1 class="text-center"> 
         <a href=<%= manufacturer.url + "/update" %> class="btn btn-secondary">Update manufacturer info</a>
-        <a href="#" class="btn btn-secondary">Update manufacturer image</a>
-        <a href="#" class="btn btn-secondary">Delete manufacturer</a></h1>
+        <a href=<%= manufacturer.url + "/update" %> class="btn btn-secondary">Update manufacturer image</a>
+        <a href=<%= manufacturer.url + "/delete" %> class="btn btn-secondary">Delete manufacturer</a></h1>
     </div>
     <div class="container-sm">
         <div class="card my-4 mx-auto">
@@ -21,12 +21,15 @@
     </div>
     <div class="container">
         <h5>Items made by <%= manufacturer.name %></h5>
-        <div class="row">
+        <div class="row gap-3 mb-5">
+            <% if (manufacturer_items.length < 1) { %>
+                <p>No items.</p>
+            <% } %>
             <% manufacturer_items.forEach((item) => { %>
-                <div class="col">
+                <div class="col-5">
                 <a href=<%= item.url %> class="text-decoration-none text-reset">
-                <div class="card">
-                    <img src=<%= item.img %> style="max-height:20rem;object-fit:scale-down;" class="card-img-top" alt=<%= item.name %>>
+                <div class="card h-100">
+                    <img src=<%= item.img %> style="max-height:15rem;object-fit:scale-down;" class="card-img-top" alt=<%= item.name %>>
                     <div class="card-body">
                         <h5 class="card-title text-center"><%= item.name %></h5>
                     </div>
