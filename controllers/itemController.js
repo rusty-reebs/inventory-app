@@ -92,14 +92,14 @@ exports.item_create_get = function (req, res, next) {
 };
 
 exports.item_create_post = [
-  (req, res, next) => {
-    if (!(req.body.category instanceof Array)) {
-      if (typeof req.body.category === "undefined") req.body.category = [];
-    } else {
-      req.body.category = new Array(req.body.category);
-    }
-    next();
-  },
+  //   (req, res, next) => {
+  //     if (!(req.body.category instanceof Array)) {
+  //       if (typeof req.body.category === "undefined") req.body.category = [];
+  //     } else {
+  //       req.body.category = new Array(req.body.category);
+  //     }
+  //     next();
+  //   },
   //   body("name", "Name must not be empty.").trim().isLength({ min: 1 }).escape(),
   //   body("description", "Description must not be empty.")
   //     .trim()
@@ -176,6 +176,7 @@ exports.item_create_post = [
           console.log(err);
           return next(err);
         }
+        console.log("new item", item);
         res.redirect(item.url);
       });
     }
@@ -237,6 +238,8 @@ exports.item_update_get = function (req, res, next) {
         err.status = 404;
         return next(err);
       }
+      console.log("item categories", results.item.category);
+      console.log(results.categories);
       for (
         let all_category_iter = 0;
         all_category_iter < results.categories.length;
@@ -252,6 +255,10 @@ exports.item_update_get = function (req, res, next) {
             results.item.category[item_category_iter]._id.toString()
           ) {
             results.categories[all_category_iter].checked = "true";
+            console.log(
+              "category array",
+              results.categories[all_category_iter].checked
+            );
           }
         }
       }

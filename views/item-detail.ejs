@@ -11,7 +11,7 @@
     </div>
     <div class="container-sm">
         <div class="card my-4 mx-auto">
-            <img src=<%= item_details.img %> style="max-height:20rem;object-fit:scale-down;" class="card-img-top" alt="...">
+            <img src=<%= item_details.img %> style="max-height:20rem;object-fit:scale-down;" class="card-img-top" alt="<%= item_details.name %>">
             <div class="card-body">
                   <h5 class="card-title"><%= item_details.manufacturer.name + " " + item_details.name %></h5>
                   <p class="card-text"><%= item_details.description %></p>
@@ -19,10 +19,10 @@
                   <p class="card-text"><strong>Number in stock: </strong><%= item_details.number_in_stock %></p>
                   <p class="card-text"><strong>Categories: </strong>
                     <% item_details.category.forEach((category) => { %>
-                    <a href="#" class="btn btn-secondary btn-sm"><%= category.name %></a>
+                    <a href=<%= "/category/" + category._id %> class="btn btn-secondary btn-sm"><%= category.name %></a>
                     <% }) %> </p>
-                <p class="card-text"><strong>Manufacturer: </strong><a href="#" class="btn btn-secondary btn-sm"><%= item_details.manufacturer.name %></a></p>
-                <p class="card-text"><strong>Made In: </strong><a href="#" class="btn btn-secondary btn-sm"><%= item_details.made_in.name %></a></p>
+                <p class="card-text"><strong>Manufacturer: </strong><a href=<%= "/manufacturer/" + item_details.manufacturer._id %> class="btn btn-secondary btn-sm"><%= item_details.manufacturer.name %></a></p>
+                <p class="card-text"><strong>Made In: </strong><a href=<%= "/made_in/" + item_details.made_in._id %> class="btn btn-secondary btn-sm"><%= item_details.made_in.name %></a></p>
             </div>
         </div>
     </div>

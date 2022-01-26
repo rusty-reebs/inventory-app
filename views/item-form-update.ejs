@@ -10,7 +10,7 @@
         <form method="POST" action="">
             <div class="mb-3 mx-auto">
                 <label for="name" class="form-label">Item</label>
-                <input type="text" class="form-control" name="name" required="true" value=<%= item.name %>>
+                <input type="text" class="form-control" name="name" required="true" value="<%= item.name %>">
             </div>
             <div class="mb-3 mx-auto">
                 <label for="description" class="form-label">Description</label>
@@ -41,11 +41,13 @@
                 </div>
                 <div class="col-auto">
                     <label for="made_in" class="form-label">Made In</label>
-                    <select class="form-select" aria-label="Select country">
-                        <option selected><%= item.made_in.name %></option>
+                    <select class="form-select" name="made_in" aria-label="Select country">
                         <% made_ins.forEach((made_in) => { %>
-                            <% if (made_in.name !== item.made_in.name) { %>
-                        <option value=<%= made_in.name %>><%= made_in.name %></option>
+                            <% if (typeof item != "undefined") { %>
+                                <% var selected = (made_in._id.toString() === item.made_in._id.toString() || made_in._id.toString() === item.made_in) ? "selected" : "" %>
+                                <option value="<%= made_in._id %>" <%= selected %>><%= made_in.name %></option>
+                            <% } else { %>
+                                <option value="<%= made_in._id %>"><%= made_in.name %></option>
                             <% } %>
                         <% }) %>
                     </select>
@@ -55,8 +57,11 @@
             <div class="mb-3 mx-auto">
                 <label class="form-label" for="category">Category</label><br>
                     <% categories.forEach((category) => { %>
-                    <input type="checkbox" class="btn-check" id=<%= category._id %> name="category" value=<%= category._id %> checked=<%= category.checked %> autocomplete="off">
-                    <label class="btn btn-outline-secondary" for=<%= category._id %>><%= category.name %></label>
+                        <% if (typeof category.checked != "undefined") { %>
+                            <% var checked = (category.checked) ? "checked" : "" %>
+                            <% } %>
+                    <input type="checkbox" name="category" class="btn-check" id="<%= category._id %>" value="<%= category._id %>" <%= checked %> autocomplete="off">
+                    <label class="btn btn-outline-secondary" for="<%= category._id %>"><%= category.name %></label>
                     <% }) %>
             </div>
             <button class="btn btn-secondary" type="submit">Submit</button>
