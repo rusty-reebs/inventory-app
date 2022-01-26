@@ -12,7 +12,7 @@ exports.category_list = function (req, res, next) {
       if (err) {
         return next(err);
       }
-      res.render("category-list", {
+      res.render("category/category-list", {
         title: "Item Categories",
         category_list: list_categories,
       });
@@ -41,7 +41,7 @@ exports.category_detail = function (req, res, next) {
         err.status = 404;
         return next(err);
       }
-      res.render("category-detail", {
+      res.render("category/category-detail", {
         title: "Category Detail",
         category: results.category,
         category_items: results.category_items,
@@ -51,7 +51,7 @@ exports.category_detail = function (req, res, next) {
 };
 
 exports.category_create_get = function (req, res) {
-  res.render("category-form-create", { title: "Create Category" });
+  res.render("category/category-form-create", { title: "Create Category" });
 };
 
 exports.category_create_post = [
@@ -60,7 +60,7 @@ exports.category_create_post = [
     const errors = validationResult(req);
     let category = new Category({ name: req.body.name });
     if (!errors.isEmpty()) {
-      res.render("category-form-create", {
+      res.render("category/category-form-create", {
         title: "Create Category",
         category: category,
         errors: errors.array(),
@@ -106,7 +106,7 @@ exports.category_delete_get = function (req, res, next) {
       if (results.category == null) {
         res.redirect("/categories");
       }
-      res.render("category-delete", {
+      res.render("category/category-delete", {
         title: "Delete Category",
         category: results.category,
         category_items: results.categorys_items,
@@ -129,7 +129,7 @@ exports.category_delete_post = function (req, res, next) {
         return next(err);
       }
       if (results.categorys_items.length > 0) {
-        res.render("category-delete", {
+        res.render("category/category-delete", {
           title: "Delete Category",
           category: results.category,
           category_items: results.categorys_items,
@@ -157,7 +157,7 @@ exports.category_update_get = function (req, res, next) {
       if (err) {
         return next(err);
       }
-      res.render("category-form-update", {
+      res.render("category/category-form-update", {
         title: "Update Category",
         category: results,
       });
@@ -173,7 +173,7 @@ exports.category_update_post = [
     let category = new Category({ name: req.body.name, _id: req.params.id });
 
     if (!errors.isEmpty()) {
-      res.render("category-form-create", {
+      res.render("category/category-form-create", {
         title: "Create Category",
         category: category,
         errors: errors.array(),

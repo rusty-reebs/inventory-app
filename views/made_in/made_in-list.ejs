@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
-  <%- include('partials/head'); -%>
+  <%- include('../partials/head'); -%>
   <body>
-    <%- include('partials/topnav'); -%>
+    <%- include('../partials/topnav'); -%>
     <div class="container">
         <h1 class="text-center"><%= title %>
-        <a href="/category/create" class="btn btn-secondary float-end">Add new category</a></h1>
+        <a href="/made_in/create" class="btn btn-secondary float-end">Add new country</a></h1>
     </div>
     <div class="container">
         <div class="row gap-3 my-4">
-        <% category_list.forEach((category) => { %>
-    <%- include('category-card', {category_details: category}); -%>
+        <% made_in_list.forEach((made_in) => { %>
+    <%- include('made_in-card', {made_in_details: made_in}); -%>
       <% }) %>
         </div>
     </div>

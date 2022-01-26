@@ -13,7 +13,7 @@ exports.made_in_list = function (req, res, next) {
       if (err) {
         return next(err);
       }
-      res.render("made_in-list", {
+      res.render("made_in/made_in-list", {
         title: "Made In",
         made_in_list: list_made_ins,
       });
@@ -42,7 +42,7 @@ exports.made_in_detail = function (req, res, next) {
         err.status = 404;
         return next(err);
       }
-      res.render("made_in-detail", {
+      res.render("made_in/made_in-detail", {
         title: "Country Detail",
         made_in: results.made_in,
         made_in_items: results.made_in_items,
@@ -52,7 +52,7 @@ exports.made_in_detail = function (req, res, next) {
 };
 
 exports.made_in_create_get = function (req, res) {
-  res.render("made_in-form-create", { title: "Create Country" });
+  res.render("made_in/made_in-form-create", { title: "Create Country" });
 };
 
 exports.made_in_create_post = [
@@ -66,7 +66,7 @@ exports.made_in_create_post = [
     });
 
     if (!errors.isEmpty()) {
-      res.render("made_in-form-create", {
+      res.render("made_in/made_in-form-create", {
         title: "Create Country",
         made_in: made_in,
         errors: errors.array(),
@@ -112,7 +112,7 @@ exports.made_in_delete_get = function (req, res, next) {
       if (results.made_in == null) {
         res.redirect("/made_in");
       }
-      res.render("made_in-delete", {
+      res.render("made_in/made_in-delete", {
         title: "Delete Country",
         made_in: results.made_in,
         made_ins_items: results.made_ins_items,
@@ -136,7 +136,7 @@ exports.made_in_delete_post = function (req, res, next) {
         return next(err);
       }
       if (results.made_ins_items.length > 0) {
-        res.render("made_in-delete", {
+        res.render("made_in/made_in-delete", {
           title: "Delete Country",
           made_in: results.made_in,
           made_ins_items: results.made_ins_items,
@@ -164,7 +164,7 @@ exports.made_in_update_get = function (req, res, next) {
       if (err) {
         return next(err);
       }
-      res.render("made_in-form-update", {
+      res.render("made_in/made_in-form-update", {
         title: "Update Country",
         made_in: results,
       });
@@ -193,7 +193,7 @@ exports.made_in_update_post = [
     });
 
     if (!errors.isEmpty()) {
-      res.render("made_in-form-update", {
+      res.render("made_in/made_in-form-update", {
         title: "Update Country",
         made_in: made_in,
         errors: errors.array(),

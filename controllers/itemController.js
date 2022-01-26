@@ -47,7 +47,10 @@ exports.item_list = function (req, res, next) {
       if (err) {
         return next(err);
       }
-      res.render("item-list", { title: "All Items", item_list: list_items });
+      res.render("item/item-list", {
+        title: "All Items",
+        item_list: list_items,
+      });
     });
 };
 
@@ -60,7 +63,7 @@ exports.item_detail = function (req, res, next) {
       if (err) {
         return next(err);
       }
-      res.render("item-detail", { item_details: item_details });
+      res.render("item/item-detail", { item_details: item_details });
     });
 };
 
@@ -81,7 +84,7 @@ exports.item_create_get = function (req, res, next) {
       if (err) {
         return next(err);
       }
-      res.render("item-form-create", {
+      res.render("item/item-form-create", {
         title: "Create Item",
         manufacturers: results.manufacturers,
         categories: results.categories,
@@ -159,7 +162,7 @@ exports.item_create_post = [
               results.categories[i].checked = "true";
             }
           }
-          res.render("item-form-create", {
+          res.render("item/item-form-create", {
             title: "Create Item",
             manufacturers: results.manufacturers,
             categories: results.categories,
@@ -193,7 +196,7 @@ exports.item_delete_get = function (req, res, next) {
       if (results == null) {
         res.redirect("/items");
       }
-      res.render("item-delete", {
+      res.render("item/item-delete", {
         title: "Delete Item",
         item: results,
       });
@@ -262,7 +265,7 @@ exports.item_update_get = function (req, res, next) {
           }
         }
       }
-      res.render("item-form-update", {
+      res.render("item/item-form-update", {
         title: "Update Item",
         manufacturers: results.manufacturers,
         categories: results.categories,
@@ -341,7 +344,7 @@ exports.item_update_post = [
               results.categories[i].checked = "true";
             }
           }
-          res.render("item-form-update", {
+          res.render("item/item-form-update", {
             title: "Update Item",
             manufacturers: results.manufacturers,
             categories: results.categories,

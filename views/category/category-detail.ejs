@@ -1,29 +1,29 @@
 <!DOCTYPE html>
 <html>
-  <%- include('partials/head'); -%>
+  <%- include('../partials/head'); -%>
   <body>
-    <%- include('partials/topnav'); -%>
+    <%- include('../partials/topnav'); -%>
     <div class="container">
         <h1 class="text-center"> 
-        <a href=<%= made_in.url + "/update" %> class="btn btn-secondary">Update country info</a>
-        <a href="#" class="btn btn-secondary">Update country image</a>
-        <a href=<%= made_in.url + "/delete" %> class="btn btn-secondary">Delete country </a></h1>
+        <a href=<%= category.url + "/update" %> class="btn btn-secondary">Update category info</a>
+        <a href="#" class="btn btn-secondary">Update category image</a>
+        <a href=<%= category.url + "/delete" %> class="btn btn-secondary">Delete category</a></h1>
     </div>
     <div class="container-sm">
         <div class="card my-4 mx-auto">
-            <img src=<%= made_in.img %> style="max-height:20rem;object-fit:scale-down;" class="card-img-top" alt=<%= made_in.name %>>
+            <img src=<%= category.img %> style="max-height:20rem;object-fit:scale-down;" class="card-img-top" alt=<%= category.name %>>
             <div class="card-body">
-                  <h5 class="card-title"><%= made_in.name %></h5>
+                  <h5 class="card-title"><%= category.name %></h5>
             </div>
         </div>
     </div>
     <div class="container">
-        <h5>Items made in <%= made_in.name %></h5>
+        <h5>Items in category <%= category.name %></h5>
         <div class="row gap-3 mb-5">
-            <% if (made_in_items.length < 1) { %>
+            <% if (category_items.length < 1) { %>
                 <p>No items.</p>
             <% } %>
-            <% made_in_items.forEach((item) => { %>
+            <% category_items.forEach((item) => { %>
                 <div class="col-5">
                 <a href=<%= item.url %> class="text-decoration-none text-reset">
                 <div class="card h-100">

@@ -12,7 +12,7 @@ exports.manufacturer_list = function (req, res, next) {
       if (err) {
         return next(err);
       }
-      res.render("manufacturer-list", {
+      res.render("manufacturer/manufacturer-list", {
         title: "Manufacturers",
         manufacturer_list: list_manufacturers,
       });
@@ -44,7 +44,7 @@ exports.manufacturer_detail = function (req, res, next) {
         err.status = 404;
         return next(err);
       }
-      res.render("manufacturer-detail", {
+      res.render("manufacturer/manufacturer-detail", {
         title: "Manufacturer Detail",
         manufacturer: results.manufacturer,
         manufacturer_items: results.manufacturers_items,
@@ -54,7 +54,9 @@ exports.manufacturer_detail = function (req, res, next) {
 };
 
 exports.manufacturer_create_get = function (req, res) {
-  res.render("manufacturer-form-create", { title: "Create Manufacturer" });
+  res.render("manufacturer/manufacturer-form-create", {
+    title: "Create Manufacturer",
+  });
 };
 
 exports.manufacturer_create_post = [
@@ -78,7 +80,7 @@ exports.manufacturer_create_post = [
       established: req.body.established,
     });
     if (!errors.isEmpty()) {
-      res.render("manufacturer-form-create", {
+      res.render("manufacturer/manufacturer-form-create", {
         title: "Create Manufacturer",
         manufacturer: manufacturer,
         errors: errors.array(),
@@ -122,9 +124,9 @@ exports.manufacturer_delete_get = function (req, res) {
         return next(err);
       }
       if (results.manufacturer == null) {
-        res.redirect("/categories");
+        res.redirect("/manufacturers");
       }
-      res.render("manufacturer-delete", {
+      res.render("manufacturer/manufacturer-delete", {
         title: "Delete Manufacturer",
         manufacturer: results.manufacturer,
         manufacturer_items: results.manufacturers_items,
@@ -147,7 +149,7 @@ exports.manufacturer_delete_post = function (req, res, next) {
         return next(err);
       }
       if (results.manufacturers_items.length > 0) {
-        res.render("manufacturer-delete", {
+        res.render("manufacturer/manufacturer-delete", {
           title: "Delete Manufacturer",
           manufacturer: results.manufacturer,
           manufacturer_items: results.manufacturers_items,
@@ -177,7 +179,7 @@ exports.manufacturer_update_get = function (req, res, next) {
       if (err) {
         return next(err);
       }
-      res.render("manufacturer-form-update", {
+      res.render("manufacturer/manufacturer-form-update", {
         title: "Update Manufacturer",
         manufacturer: results,
       });
@@ -209,7 +211,7 @@ exports.manufacturer_update_post = [
     });
 
     if (!errors.isEmpty()) {
-      res.render("manufacturer-form-update", {
+      res.render("manufacturer/manufacturer-form-update", {
         title: "Update Manufacturer",
         manufacturer: manufacturer,
         errors: errors.array(),
