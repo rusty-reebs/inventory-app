@@ -164,6 +164,33 @@ exports.category_update_get = function (req, res, next) {
     });
 };
 
-exports.category_update_post = function (req, res) {
-  res.send("NOT IMPLEMENTED");
-};
+exports.category_update_post = [
+  body("name", "Category name required.").trim().isLength({ min: 1 }).escape(),
+
+  (req, res, next) => {
+    const errors = validationResult(req);
+
+    let category = new Category({ name: req.body.name, _id: req.params.id });
+
+    if (!errors.isEmpty()) {
+      res.render("category-form-create", {
+        title: "Create Category",
+        category: category,
+        errors: errors.array(),
+      });
+      return;
+    } else {
+      Category.findByIdAndUpdate(
+        req.params.id,
+        category,
+        {},
+        function (err, the_category) {
+          if (err) {
+            return next(err);
+          }
+          res.redirect(the_category.url);
+        }
+      );
+    }
+  },
+];

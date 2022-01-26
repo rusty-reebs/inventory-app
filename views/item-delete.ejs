@@ -7,7 +7,7 @@
         <h1 class="text-center"><%= title %></h1>
     </div>
     <div class="container">
-        <p>Do you really want to delete this item?</p>
+        <p>Do you really want to delete <%= item.manufacturer.name + " " + item.name %>?</p>
         <div class="container">
             <form method="POST" action="">
                 <input type="hidden" class="form-control" name="itemid" required="true" value=<%= item._id %>>

@@ -132,8 +132,7 @@ exports.manufacturer_delete_get = function (req, res) {
     }
   );
 };
-
-exports.manufacturer_delete_post = function (req, res) {
+exports.manufacturer_delete_post = function (req, res, next) {
   async.parallel(
     {
       manufacturer: function (callback) {
@@ -169,7 +168,7 @@ exports.manufacturer_delete_post = function (req, res) {
   );
 };
 
-(exports.manufacturer_update_get = function (req, res, next) {
+exports.manufacturer_update_get = function (req, res, next) {
   Manufacturer.findById(req.params.id)
     .populate("name")
     .populate("description")
@@ -183,7 +182,51 @@ exports.manufacturer_delete_post = function (req, res) {
         manufacturer: results,
       });
     });
-}),
-  (exports.manufacturer_update_post = function (req, res) {
-    res.send("NOT IMPLEMENTED");
-  });
+};
+
+exports.manufacturer_update_post = [
+  // body("name", "Manufacturer name required.")
+  //   .trim()
+  //   .isLength({ min: 1 })
+  //   .escape(),
+  // body("description", "Description required.")
+  //   .trim()
+  //   .isLength({ min: 1 })
+  //   .escape(),
+  // body("established", "Year established required.")
+  //   .trim()
+  //   .isLength({ min: 1 })
+  //   .escape(),
+
+  (req, res, next) => {
+    const errors = validationResult(req);
+
+    let manufacturer = new Manufacturer({
+      name: req.body.name,
+      description: req.body.description,
+      established: req.body.established,
+      _id: req.params.id,
+    });
+
+    if (!errors.isEmpty()) {
+      res.render("manufacturer-form-update", {
+        title: "Update Manufacturer",
+        manufacturer: manufacturer,
+        errors: errors.array(),
+      });
+      return;
+    } else {
+      Manufacturer.findByIdAndUpdate(
+        req.params.id,
+        manufacturer,
+        {},
+        function (err, the_manufacturer) {
+          if (err) {
+            return next(err);
+          }
+          res.redirect(the_manufacturer.url);
+        }
+      );
+    }
+  },
+];
