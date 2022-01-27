@@ -6,6 +6,7 @@ var ManufacturerSchema = new Schema({
   name: { type: String, required: true, maxlength: 100 },
   description: { type: String, required: true, maxlength: 1000 },
   established: { type: Number, required: true },
+  image_url: { type: String, maxlength: 100 },
 });
 
 ManufacturerSchema.virtual("url").get(function () {

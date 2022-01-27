@@ -6,7 +6,7 @@ const async = require("async");
 const { body, validationResult } = require("express-validator");
 
 exports.manufacturer_list = function (req, res, next) {
-  Manufacturer.find({}, "name description established img")
+  Manufacturer.find({}, "name description established image_url")
     .sort({ name: 1 })
     .exec(function (err, list_manufacturers) {
       if (err) {
@@ -26,12 +26,14 @@ exports.manufacturer_detail = function (req, res, next) {
         Manufacturer.findById(req.params.id)
           .populate("description")
           .populate("established")
+          .populate("image_url")
           .exec(callback);
       },
       manufacturers_items: function (callback) {
         Item.find({ manufacturer: req.params.id }, "item summary")
           .populate("name")
-          .populate("img")
+          .populate("image_url")
+          .populate("manufacturer")
           .exec(callback);
       },
     },

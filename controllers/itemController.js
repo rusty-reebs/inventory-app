@@ -37,7 +37,7 @@ exports.index = function (req, res) {
 exports.item_list = function (req, res, next) {
   Item.find(
     {},
-    "name category manufacturer description price made_in number_in_stock img"
+    "name category manufacturer description price made_in number_in_stock image_url"
   )
     .sort({ category: 1 })
     .populate("manufacturer")

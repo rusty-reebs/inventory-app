@@ -28,7 +28,8 @@ exports.category_detail = function (req, res, next) {
       category_items: function (callback) {
         Item.find({ category: req.params.id }, "category summary")
           .populate("name")
-          .populate("img")
+          .populate("manufacturer")
+          .populate("image_url")
           .exec(callback);
       },
     },

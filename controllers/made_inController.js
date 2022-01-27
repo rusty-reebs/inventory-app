@@ -1,14 +1,14 @@
 // made_inController.js
 
-const { findOneAndUpdate } = require("../models/item");
 const Item = require("../models/item");
 var MadeIn = require("../models/made_in");
 const async = require("async");
 const { body, validationResult } = require("express-validator");
 
 exports.made_in_list = function (req, res, next) {
-  MadeIn.find({}, "name img")
+  MadeIn.find({}, "name image_url")
     .sort({ name: 1 })
+    .populate("image_url")
     .exec(function (err, list_made_ins) {
       if (err) {
         return next(err);
@@ -29,7 +29,8 @@ exports.made_in_detail = function (req, res, next) {
       made_in_items: function (callback) {
         Item.find({ made_in: req.params.id }, "made_in summary")
           .populate("name")
-          .populate("img")
+          .populate("manufacturer")
+          .populate("image_url")
           .exec(callback);
       },
     },
