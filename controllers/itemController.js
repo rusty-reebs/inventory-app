@@ -5,6 +5,7 @@ var Manufacturer = require("../models/manufacturer");
 var MadeIn = require("../models/made_in");
 var Category = require("../models/category");
 const { body, validationResult } = require("express-validator");
+const { uploadFile } = require("../utils/cloudinary");
 
 var async = require("async");
 
@@ -126,9 +127,12 @@ exports.item_create_post = [
   //     .escape(),
   //   body("category.*").escape(),
 
-  (req, res, next) => {
+  async (req, res, next) => {
     const errors = validationResult(req);
     console.log(errors);
+
+    // upload image to Cloudinary
+    let img = await uploadFile(req.file, "items");
 
     let item = new Item({
       name: req.body.name,
@@ -138,6 +142,7 @@ exports.item_create_post = [
       price: req.body.price,
       number_in_stock: req.body.number_in_stock,
       category: req.body.category,
+      image_url: img.url,
     });
 
     if (!errors.isEmpty()) {
