@@ -6,7 +6,8 @@ var Schema = mongoose.Schema;
 
 var MadeInSchema = new Schema({
   name: { type: String, required: true, maxlength: 100 },
-  image_url: { type: String, maxLength: 100 },
+  image_url: { type: String, maxlength: 500 },
+  cloudinary_id: { type: String, maxlength: 500 },
 });
 
 MadeInSchema.virtual("url").get(function () {

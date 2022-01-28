@@ -5,7 +5,7 @@ var Manufacturer = require("../models/manufacturer");
 var MadeIn = require("../models/made_in");
 var Category = require("../models/category");
 const { body, validationResult } = require("express-validator");
-const { uploadFile } = require("../utils/cloudinary");
+const { uploadFile, deleteFile } = require("../utils/cloudinary");
 
 var async = require("async");
 
@@ -143,6 +143,7 @@ exports.item_create_post = [
       number_in_stock: req.body.number_in_stock,
       category: req.body.category,
       image_url: img.url,
+      cloudinary_id: img.public_id,
     });
 
     if (!errors.isEmpty()) {
@@ -208,11 +209,18 @@ exports.item_delete_get = function (req, res, next) {
     });
 };
 exports.item_delete_post = function (req, res, next) {
-  Item.findByIdAndRemove(req.body.itemid, function deleteItem(err) {
+  Item.findById(req.params.id).exec(async function (err, results) {
     if (err) {
       return next(err);
     }
-    res.redirect("/items");
+    console.log("RESULTSSSSS", results);
+    await deleteFile(results.cloudinary_id);
+    Item.findByIdAndRemove(req.body.itemid, function deleteItem(err) {
+      if (err) {
+        return next(err);
+      }
+      res.redirect("/items");
+    });
   });
 };
 

@@ -15,6 +15,7 @@ var ItemSchema = new Schema({
   price: { type: Number, required: true },
   number_in_stock: { type: Number, required: true },
   image_url: { type: String, maxLength: 500 },
+  cloudinary_id: { type: String, maxLength: 500 },
 });
 
 ItemSchema.virtual("url").get(function () {

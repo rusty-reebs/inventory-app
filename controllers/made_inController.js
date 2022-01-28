@@ -4,6 +4,7 @@ const Item = require("../models/item");
 var MadeIn = require("../models/made_in");
 const async = require("async");
 const { body, validationResult } = require("express-validator");
+const { uploadFile, deleteFile } = require("../utils/cloudinary");
 
 exports.made_in_list = function (req, res, next) {
   MadeIn.find({}, "name image_url")
@@ -59,11 +60,16 @@ exports.made_in_create_get = function (req, res) {
 exports.made_in_create_post = [
   body("name", "Country name required.").trim().isLength({ min: 1 }).escape(),
 
-  (req, res, next) => {
+  async (req, res, next) => {
     const errors = validationResult(req);
+
+    // upload image to Cloudinary
+    let img = await uploadFile(req.file, "made_ins");
 
     let made_in = new MadeIn({
       name: req.body.name,
+      image_url: img.url,
+      cloudinary_id: img.public_id,
     });
 
     if (!errors.isEmpty()) {
@@ -134,7 +140,7 @@ exports.made_in_delete_post = function (req, res, next) {
         Item.find({ made_in: req.body.made_inid }).exec(callback);
       },
     },
-    function (err, results) {
+    async function (err, results) {
       if (err) {
         return next(err);
       }
@@ -146,6 +152,7 @@ exports.made_in_delete_post = function (req, res, next) {
         });
         return;
       } else {
+        await deleteFile(results.made_in.cloudinary_id);
         MadeIn.findByIdAndRemove(
           req.body.made_inid,
           function deleteMadeIn(err) {

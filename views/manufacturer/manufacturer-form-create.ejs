@@ -7,7 +7,7 @@
         <h1 class="text-center"><%= title %></h1>
     </div>
     <div class="container">
-        <form method="POST" action="">
+        <form method="POST" action="" enctype="multipart/form-data">
             <div class="mb-3 mx-auto">
                 <label for="name" class="form-label">Manufacturer</label>
                 <input type="text" class="form-control" name="name" required="true" value="">
@@ -23,6 +23,10 @@
                 <input type="number" class="form-control" name="established" required="true" value="">
                 </div>
             </div>
+            </div>
+            <div class="mb-3 mx-auto">
+                <label class="form-label" for="image_url">Image</label><br>
+                <input type="file" name="image_url" required="true">
             </div>
             <button class="btn btn-secondary" type="submit">Submit</button>
         </form>

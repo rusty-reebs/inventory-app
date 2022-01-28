@@ -4,6 +4,7 @@ const Item = require("../models/item");
 var Manufacturer = require("../models/manufacturer");
 const async = require("async");
 const { body, validationResult } = require("express-validator");
+const { uploadFile, deleteFile } = require("../utils/cloudinary");
 
 exports.manufacturer_list = function (req, res, next) {
   Manufacturer.find({}, "name description established image_url")
@@ -74,13 +75,20 @@ exports.manufacturer_create_post = [
     .trim()
     .isLength({ min: 1 })
     .escape(),
-  (req, res, next) => {
+  async (req, res, next) => {
     const errors = validationResult(req);
+
+    // upload image to Cloudinary
+    let img = await uploadFile(req.file, "manufacturers");
+
     let manufacturer = new Manufacturer({
       name: req.body.name,
       description: req.body.description,
       established: req.body.established,
+      image_url: img.url,
+      cloudinary_id: img.public_id,
     });
+
     if (!errors.isEmpty()) {
       res.render("manufacturer/manufacturer-form-create", {
         title: "Create Manufacturer",
@@ -148,7 +156,7 @@ exports.manufacturer_delete_post = function (req, res, next) {
         Item.find({ manufacturer: req.body.manufacturerid }).exec(callback);
       },
     },
-    function (err, results) {
+    async function (err, results) {
       if (err) {
         return next(err);
       }
@@ -160,6 +168,7 @@ exports.manufacturer_delete_post = function (req, res, next) {
         });
         return;
       } else {
+        await deleteFile(results.manufacturer.cloudinary_id);
         Manufacturer.findByIdAndRemove(
           req.body.manufacturerid,
           function deleteManufacturer(err) {

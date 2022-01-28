@@ -35,6 +35,7 @@ router.get(
 );
 router.post(
   "/manufacturer/create",
+  upload.single("image_url"),
   manufacturer_controller.manufacturer_create_post
 );
 router.get(
@@ -59,7 +60,11 @@ router.get("/manufacturers", manufacturer_controller.manufacturer_list);
 // Made In Routes
 
 router.get("/made_in/create", made_in_controller.made_in_create_get);
-router.post("/made_in/create", made_in_controller.made_in_create_post);
+router.post(
+  "/made_in/create",
+  upload.single("image_url"),
+  made_in_controller.made_in_create_post
+);
 router.get("/made_in/:id/delete", made_in_controller.made_in_delete_get);
 router.post("/made_in/:id/delete", made_in_controller.made_in_delete_post);
 router.get("/made_in/:id/update", made_in_controller.made_in_update_get);
