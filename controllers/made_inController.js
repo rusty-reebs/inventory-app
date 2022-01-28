@@ -224,3 +224,60 @@ exports.made_in_update_post = [
     }
   },
 ];
+
+exports.made_in_update_image_get = function (req, res, next) {
+  MadeIn.findById(req.params.id, function (err, result) {
+    if (err) {
+      return next(err);
+    }
+    if (result == null) {
+      let err = new Error("Country not found.");
+      err.status = 404;
+      return next(err);
+    }
+    res.render("made_in/made_in-update-image", {
+      title: "Update Country Image",
+      made_in: result,
+    });
+  });
+};
+
+exports.made_in_update_image_post = [
+  body("name", "Name must not be empty.").trim().isLength({ min: 1 }).escape(),
+
+  async (req, res, next) => {
+    const errors = validationResult(req);
+
+    const result = await uploadFile(req.file, "made_ins");
+    const made_in = new MadeIn({
+      oldCloudinary_id: req.body.oldCloudinary_id,
+      _id: req.params.id,
+      image_url: result.url,
+      cloudinary_id: result.public_id,
+    });
+
+    if (req.body.oldCloudinary_id) {
+      await deleteFile(req.body.oldCloudinary_id);
+    }
+
+    if (!errors.isEmpty()) {
+      res.render("made_in-update-image", {
+        title: "Update Country Image",
+        errors: errors.array(),
+      });
+      return;
+    } else {
+      MadeIn.findByIdAndUpdate(
+        req.params.id,
+        made_in,
+        {},
+        function (err, result) {
+          if (err) {
+            return next(err);
+          }
+          res.redirect(made_in.url);
+        }
+      );
+    }
+  },
+];

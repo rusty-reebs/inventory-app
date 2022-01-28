@@ -245,3 +245,60 @@ exports.manufacturer_update_post = [
     }
   },
 ];
+
+exports.manufacturer_update_image_get = function (req, res, next) {
+  Manufacturer.findById(req.params.id, function (err, result) {
+    if (err) {
+      return next(err);
+    }
+    if (result == null) {
+      let err = new Error("Manufacturer not found.");
+      err.status = 404;
+      return next(err);
+    }
+    res.render("manufacturer/manufacturer-update-image", {
+      title: "Update Manufacturer Image",
+      manufacturer: result,
+    });
+  });
+};
+
+exports.manufacturer_update_image_post = [
+  body("name", "Name must not be empty.").trim().isLength({ min: 1 }).escape(),
+
+  async (req, res, next) => {
+    const errors = validationResult(req);
+
+    const result = await uploadFile(req.file, "manufacturers");
+    const manufacturer = new Manufacturer({
+      oldCloudinary_id: req.body.oldCloudinary_id,
+      _id: req.params.id,
+      image_url: result.url,
+      cloudinary_id: result.public_id,
+    });
+
+    if (req.body.oldCloudinary_id) {
+      await deleteFile(req.body.oldCloudinary_id);
+    }
+
+    if (!errors.isEmpty()) {
+      res.render("manufacturer-update-image", {
+        title: "Update Manufacturer Image",
+        errors: errors.array(),
+      });
+      return;
+    } else {
+      Manufacturer.findByIdAndUpdate(
+        req.params.id,
+        manufacturer,
+        {},
+        function (err, result) {
+          if (err) {
+            return next(err);
+          }
+          res.redirect(manufacturer.url);
+        }
+      );
+    }
+  },
+];

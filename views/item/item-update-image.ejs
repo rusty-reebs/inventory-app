@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <%- include('../partials/head'); -%>
+  <body>
+    <%- include('../partials/topnav'); -%>
+    <div class="container">
+        <h1 class="text-center"><%= title %></h1>
+    </div>
+    <div class="container">
+        <form method="POST" action="" enctype="multipart/form-data">
+            <div class="mb-3 mx-auto">
+                <label class="form-label" for="image_url">Image</label><br>
+                <input type="file" name="image_url" required="true">
+            </div>
+            <div class="mb-3 mx-auto">
+                <input type="hidden" class="form-control" name="name" required="true" value=<%= item.name %>>
+                <input type="hidden" class="form-control" name="oldCloudinary_id" required="true" value=<%= item.cloudinary_id %>>
+            </div>
+            <button class="btn btn-secondary" type="submit">Submit</button>
+        </form>
+    </div>
+  </body>
+
