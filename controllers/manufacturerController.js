@@ -118,7 +118,9 @@ exports.manufacturer_delete_get = function (req, res) {
         Manufacturer.findById(req.params.id).exec(callback);
       },
       manufacturers_items: function (callback) {
-        Item.find({ manufacturer: req.params.id }).exec(callback);
+        Item.find({ manufacturer: req.params.id })
+          .populate("manufacturer")
+          .exec(callback);
       },
     },
     function (err, results) {

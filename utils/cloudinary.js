@@ -10,20 +10,19 @@ cloudinary.config({
   api_secret: process.env.API_SECRET,
 });
 
-exports.uploadFile = async (file, folder) => {
+exports.uploadFile = (file, folder) => {
   const fileStream = fs.createReadStream(file.path);
-  await cloudinary.uploader.upload(
-    fileStream.path,
-    {
-      folder: "/inventory-app/" + folder,
-      allowed_formats: ["jpg", "jpeg", "png"],
-    },
-    function (err, result) {
-      if (err) {
-        console.log(err);
+  return new Promise((resolve, reject) => {
+    cloudinary.uploader.upload(
+      fileStream.path,
+      {
+        folder: "/inventory-app/" + folder,
+        allowed_formats: ["jpg", "jpeg", "png"],
+      },
+      (err, result) => {
+        if (err) return reject(err);
+        return resolve(result);
       }
-      console.log(result);
-      return result;
-    }
-  );
+    );
+  });
 };

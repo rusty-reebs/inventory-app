@@ -103,7 +103,9 @@ exports.made_in_delete_get = function (req, res, next) {
         MadeIn.findById(req.params.id).exec(callback);
       },
       made_ins_items: function (callback) {
-        Item.find({ made_in: req.params.id }).exec(callback);
+        Item.find({ made_in: req.params.id })
+          .populate("manufacturer")
+          .exec(callback);
       },
     },
     function (err, results) {
