@@ -1,18 +1,18 @@
 <div class="col">
     <a href=<%= item_details.url %> class="text-decoration-none text-reset">
-<div class="card h-100 mb-3 mx-auto" style="width: 18rem;">
-    <img src=<%= item_details.image_url %> style="max-height:10rem;object-fit:scale-down" class="card-img-top" alt="<%= item_details.name %>">
+<div class="card h-100 mb-3 mx-auto shadow" style="width: 18rem;">
+    <img src=<%= item_details.image_url %> style="max-height:10rem;object-fit:scale-down" class="card-img-top mt-2" alt="<%= item_details.name %>">
     <div class="card-body">
-      <h5 class="card-title"><%= item_details.manufacturer.name + " " + item_details.name %></h5>
-      <p class="card-text text-truncate"><%= item_details.description %></p>
-      <p class="card-text"><strong>Price: </strong>$<%= item_details.price %></p>
-      <p class="card-text"><strong>Number in stock: </strong><%= item_details.number_in_stock %></p>
+      <h5 class="card-title"><%- item_details.manufacturer.name + " " + item_details.name %></h5>
+      <p class="card-text text-truncate"><%- item_details.description %></p>
+      <p class="card-text"><strong>Price: </strong>$<%- item_details.price %></p>
+      <p class="card-text"><strong>Number in stock: </strong><%- item_details.number_in_stock %></p>
       <div class="mt-2">
       <% item_details.category.forEach((category) => { %>
-        <a href=<%= category.url %> class="btn btn-secondary btn-sm my-1"><%= category.name %></a>
+        <a href=<%= category.url %> class="btn btn-secondary btn-sm my-1"><%- category.name %></a>
         <% }) %>
-      <a href=<%= item_details.manufacturer.url %> class="btn btn-secondary btn-sm my-1"><%= item_details.manufacturer.name %></a>
-      <a href=<%= item_details.made_in.url %> class="btn btn-secondary btn-sm my-1"><%= item_details.made_in.name %></a>
+      <a href=<%= item_details.manufacturer.url %> class="btn btn-secondary btn-sm my-1"><%- item_details.manufacturer.name %></a>
+      <a href=<%= item_details.made_in.url %> class="btn btn-secondary btn-sm my-1"><%- item_details.made_in.name %></a>
     </div>
     </div>
 </div>

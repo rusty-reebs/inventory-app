@@ -181,18 +181,7 @@ exports.made_in_update_get = function (req, res, next) {
     });
 };
 exports.made_in_update_post = [
-  // body("name", "Manufacturer name required.")
-  //   .trim()
-  //   .isLength({ min: 1 })
-  //   .escape(),
-  // body("description", "Description required.")
-  //   .trim()
-  //   .isLength({ min: 1 })
-  //   .escape(),
-  // body("established", "Year established required.")
-  //   .trim()
-  //   .isLength({ min: 1 })
-  //   .escape(),
+  body("name", "Country name required.").trim().isLength({ min: 1 }).escape(),
 
   (req, res, next) => {
     const errors = validationResult(req);

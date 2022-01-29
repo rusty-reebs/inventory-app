@@ -1,9 +1,9 @@
 <div class="col">
     <a href=<%= made_in_details.url %> class="text-decoration-none text-reset">
-    <div class="card h-100 mb-3 mx-auto" style="width: 18rem;">
-        <img src=<%= made_in_details.image_url %> style="max-height:5rem;object-fit:scale-down" class="card-img-top" alt=<%= made_in_details.name %>>
+    <div class="card h-100 mb-3 mx-auto shadow" style="width: 18rem;">
+        <img src=<%= made_in_details.image_url %> style="max-height:5rem;object-fit:scale-down" class="card-img-top my-4" alt=<%- made_in_details.name %>>
         <div class="card-body">
-            <h5 class="card-title text-center"><%= made_in_details.name %></h5>
+            <h5 class="card-title text-center"><%- made_in_details.name %></h5>
         </div>
     </div>
     </a>

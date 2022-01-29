@@ -10,9 +10,18 @@
         <form method="POST" action="">
             <div class="mb-3 mx-auto">
                 <label for="name" class="form-label">Country</label>
-                <input type="text" class="form-control" name="name" required="true" value=<%= made_in.name %>>
+                <input type="text" class="form-control" name="name" required="true" value=<%- made_in.name %>>
             </div>
             <button class="btn btn-secondary" type="submit">Submit</button>
         </form>
     </div>
+    <% if (typeof errors != "undefined") { %>
+        <div class="container">
+        <ul>
+            <% errors.forEach((error) => { %>
+                <li><%= error.msg %></li>
+            <% }) %>
+        </ul>        
+        </div>
+    <% } %>
   </body>

@@ -96,40 +96,39 @@ exports.item_create_get = function (req, res, next) {
 };
 
 exports.item_create_post = [
-  //   (req, res, next) => {
-  //     if (!(req.body.category instanceof Array)) {
-  //       if (typeof req.body.category === "undefined") req.body.category = [];
-  //     } else {
-  //       req.body.category = new Array(req.body.category);
-  //     }
-  //     next();
-  //   },
-  //   body("name", "Name must not be empty.").trim().isLength({ min: 1 }).escape(),
-  //   body("description", "Description must not be empty.")
-  //     .trim()
-  //     .isLength({ min: 1 })
-  //     .escape(),
-  //   body("manufacturer", "Manufacturer must not be empty.")
-  //     .trim()
-  //     .isLength({ min: 1 })
-  //     .escape(),
-  //   body("made_in", "Made In must not be empty.")
-  //     .trim()
-  //     .isLength({ min: 1 })
-  //     .escape(),
-  //   body("price", "Price must not be empty.")
-  //     .trim()
-  //     .isLength({ min: 1 })
-  //     .escape(),
-  //   body("number_in_stock", "Number in stock must not be empty.")
-  //     .trim()
-  //     .isLength({ min: 1 })
-  //     .escape(),
-  //   body("category.*").escape(),
+  (req, res, next) => {
+    if (!(req.body.category instanceof Array)) {
+      if (typeof req.body.category === "undefined") req.body.category = [];
+    } else {
+      req.body.category = new Array(req.body.category);
+    }
+    next();
+  },
+  body("name", "Name must not be empty.").trim().isLength({ min: 1 }).escape(),
+  body("description", "Description must not be empty.")
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+  body("manufacturer", "Manufacturer must not be empty.")
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+  body("made_in", "Made In must not be empty.")
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+  body("price", "Price must not be empty.")
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+  body("number_in_stock", "Number in stock must not be empty.")
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+  body("category.*").escape(),
 
   async (req, res, next) => {
     const errors = validationResult(req);
-    console.log(errors);
 
     // upload image to Cloudinary
     let img = await uploadFile(req.file, "items");
@@ -185,7 +184,6 @@ exports.item_create_post = [
           console.log(err);
           return next(err);
         }
-        console.log("new item", item);
         res.redirect(item.url);
       });
     }
@@ -213,7 +211,6 @@ exports.item_delete_post = function (req, res, next) {
     if (err) {
       return next(err);
     }
-    console.log("RESULTSSSSS", results);
     await deleteFile(results.cloudinary_id);
     Item.findByIdAndRemove(req.body.itemid, function deleteItem(err) {
       if (err) {
@@ -254,8 +251,6 @@ exports.item_update_get = function (req, res, next) {
         err.status = 404;
         return next(err);
       }
-      console.log("item categories", results.item.category);
-      console.log(results.categories);
       for (
         let all_category_iter = 0;
         all_category_iter < results.categories.length;
@@ -271,10 +266,6 @@ exports.item_update_get = function (req, res, next) {
             results.item.category[item_category_iter]._id.toString()
           ) {
             results.categories[all_category_iter].checked = "true";
-            console.log(
-              "category array",
-              results.categories[all_category_iter].checked
-            );
           }
         }
       }
@@ -300,29 +291,29 @@ exports.item_update_post = [
     }
     next();
   },
-  //   body("name", "Name must not be empty.").trim().isLength({ min: 1 }).escape(),
-  //   body("description", "Description must not be empty.")
-  //     .trim()
-  //     .isLength({ min: 1 })
-  //     .escape(),
-  //   body("manufacturer", "Manufacturer must not be empty.")
-  //     .trim()
-  //     .isLength({ min: 1 })
-  //     .escape(),
-  //   body("made_in", "Made In must not be empty.")
-  //     .trim()
-  //     .isLength({ min: 1 })
-  //     .escape(),
-  //   body("price", "Price must not be empty.").trim().isInt({ min: 1 }).escape(),
-  //   body("number_in_stock", "Number in stock must not be empty.")
-  //     .trim()
-  //     .isInt({ min: 1 })
-  //     .escape(),
-  //   body("category.*").escape(),
+
+  body("name", "Name must not be empty.").trim().isLength({ min: 1 }).escape(),
+  body("description", "Description must not be empty.")
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+  body("manufacturer", "Manufacturer must not be empty.")
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+  body("made_in", "Made In must not be empty.")
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+  body("price", "Price must not be empty.").trim().isInt({ min: 1 }).escape(),
+  body("number_in_stock", "Number in stock must not be empty.")
+    .trim()
+    .isInt({ min: 1 })
+    .escape(),
+  body("category.*").escape(),
 
   (req, res, next) => {
     let errors = validationResult(req);
-    console.log(errors);
 
     let item = new Item({
       name: req.body.name,

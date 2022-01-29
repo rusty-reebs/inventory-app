@@ -31,4 +31,13 @@
             <button class="btn btn-secondary" type="submit">Submit</button>
         </form>
     </div>
+    <% if (typeof errors != "undefined") { %>
+        <div class="container">
+        <ul>
+            <% errors.forEach((error) => { %>
+                <li><%= error.msg %></li>
+            <% }) %>
+        </ul>        
+        </div>
+    <% } %>
   </body>

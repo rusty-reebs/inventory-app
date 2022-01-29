@@ -13,7 +13,7 @@
                 <input type="file" name="image_url" required="true">
             </div>
             <div class="mb-3 mx-auto">
-                <input type="hidden" class="form-control" name="name" required="true" value=<%= item.name %>>
+                <input type="hidden" class="form-control" name="name" required="true" value=<%- item.name %>>
                 <input type="hidden" class="form-control" name="oldCloudinary_id" required="true" value=<%= item.cloudinary_id %>>
             </div>
             <button class="btn btn-secondary" type="submit">Submit</button>

@@ -10,11 +10,11 @@
         <form method="POST" action="">
             <div class="mb-3 mx-auto">
                 <label for="name" class="form-label">Item</label>
-                <input type="text" class="form-control" name="name" required="true" value="<%= item.name %>">
+                <input type="text" class="form-control" name="name" required="true" value="<%- item.name %>">
             </div>
             <div class="mb-3 mx-auto">
                 <label for="description" class="form-label">Description</label>
-                <textarea class="form-control" rows="4" name="description" required="true"><%= item.description %></textarea>
+                <textarea class="form-control" rows="4" name="description" required="true"><%- item.description %></textarea>
             </div>
             <div class="mb-3 mx-auto">
             <div class="row">
@@ -24,9 +24,9 @@
                         <% manufacturers.forEach((manufacturer) => { %>
                             <% if (typeof item != "undefined") { %>
                                 <% var selected = (manufacturer._id.toString() === item.manufacturer._id.toString() || manufacturer._id.toString() === item.manufacturer) ? "selected" : "" %>
-                                <option value="<%= manufacturer._id %>" <%= selected %>><%= manufacturer.name %></option>
+                                <option value="<%= manufacturer._id %>" <%= selected %>><%- manufacturer.name %></option>
                                 <% } else { %>
-                                <option value="<%= manufacturer._id %>"><%= manufacturer.name %></option> 
+                                <option value="<%= manufacturer._id %>"><%- manufacturer.name %></option> 
                             <% } %>
                         <% }) %>
                     </select>
@@ -45,9 +45,9 @@
                         <% made_ins.forEach((made_in) => { %>
                             <% if (typeof item != "undefined") { %>
                                 <% var selected = (made_in._id.toString() === item.made_in._id.toString() || made_in._id.toString() === item.made_in) ? "selected" : "" %>
-                                <option value="<%= made_in._id %>" <%= selected %>><%= made_in.name %></option>
+                                <option value="<%= made_in._id %>" <%= selected %>><%- made_in.name %></option>
                             <% } else { %>
-                                <option value="<%= made_in._id %>"><%= made_in.name %></option>
+                                <option value="<%= made_in._id %>"><%- made_in.name %></option>
                             <% } %>
                         <% }) %>
                     </select>
@@ -61,18 +61,19 @@
                             <% var checked = (category.checked) ? "checked" : "" %>
                             <% } %>
                     <input type="checkbox" name="category" class="btn-check" id="<%= category._id %>" value="<%= category._id %>" <%= checked %> autocomplete="off">
-                    <label class="btn btn-outline-secondary" for="<%= category._id %>"><%= category.name %></label>
+                    <label class="btn btn-outline-secondary" for="<%= category._id %>"><%- category.name %></label>
                     <% }) %>
             </div>
             <button class="btn btn-secondary" type="submit">Submit</button>
         </form>
-        <% if (typeof errors != "undefined") { %>
-            <ul>
-                <% errors.forEach((error) => { %>
-                <li><%= error.msg %></li>
-                <% }) %>
-            </ul>
-        <% } %>
     </div>
-
+    <% if (typeof errors != "undefined") { %>
+        <div class="container">
+        <ul>
+            <% errors.forEach((error) => { %>
+                <li><%= error.msg %></li>
+            <% }) %>
+        </ul>        
+        </div>
+    <% } %>
   </body>
