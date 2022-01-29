@@ -1,8 +1,11 @@
 <%- include('../partials/page-style'); -%>
 <%- include('../partials/title'); -%>
-<a href="/item/create" class="btn btn-secondary float-end">Add new item</a></h1>
-    </div>
-    <div class="container">
+  </h1>
+</div>
+<div class="text-center">
+  <a href="/item/create" class="btn btn-secondary">Add new item</a>
+</div>
+<div class="container">
         <div class="row gap-3 my-4">
         <% item_list.forEach((item) => { %>
     <%- include('item-card', {item_details: item}); -%>

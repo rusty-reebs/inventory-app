@@ -1,8 +1,11 @@
 <%- include('../partials/page-style'); -%>
 <%- include('../partials/title'); -%>
-        <a href="/made_in/create" class="btn btn-secondary float-end">Add new country</a></h1>
-    </div>
-    <div class="container">
+</h1>
+</div>
+<div class="text-center">
+        <a href="/made_in/create" class="btn btn-secondary">Add new country</a></h1>
+</div>
+<div class="container">
         <div class="row gap-3 my-4">
         <% made_in_list.forEach((made_in) => { %>
     <%- include('made_in-card', {made_in_details: made_in}); -%>

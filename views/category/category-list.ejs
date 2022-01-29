@@ -1,8 +1,12 @@
 <%- include('../partials/page-style'); -%>
 <%- include('../partials/title'); -%>
-        <a href="/category/create" class="btn btn-secondary float-end">Add new category</a></h1>
-    </div>
-    <div class="container">
+    </h1>
+  </div>
+  <div class="text-center">
+      <a href="/category/create" class="btn btn-secondary">Add new category</a>
+  </div>
+</div>
+<div class="container">
         <div class="row gap-3 my-4">
         <% category_list.forEach((category) => { %>
     <%- include('category-card', {category_details: category}); -%>

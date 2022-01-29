@@ -1,8 +1,11 @@
 <%- include('../partials/page-style'); -%>
 <%- include('../partials/title'); -%>
-        <a href="/manufacturer/create" class="btn btn-secondary float-end">Add new manufacturer</a></h1>
-    </div>
-    <div class="container">
+</h1>
+</div>
+<div class="text-center">
+        <a href="/manufacturer/create" class="btn btn-secondary">Add new manufacturer</a></h1>
+</div>
+<div class="container">
         <div class="row gap-3 my-4">
         <% manufacturer_list.forEach((manufacturer) => { %>
     <%- include('manufacturer-card', {manufacturer_details: manufacturer}); -%>
