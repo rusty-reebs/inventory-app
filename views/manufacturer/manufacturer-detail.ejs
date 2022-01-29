@@ -1,8 +1,4 @@
-<!DOCTYPE html>
-<html>
-  <%- include('../partials/head'); -%>
-  <body>
-    <%- include('../partials/topnav'); -%>
+<%- include('../partials/page-style'); -%>
     <div class="container">
         <h1 class="text-center"> 
         <a href=<%= manufacturer.url + "/update" %> class="btn btn-secondary">Update manufacturer info</a>
@@ -20,8 +16,10 @@
         </div>
     </div>
     <div class="container">
-        <h5>Items made by <%- manufacturer.name %></h5>
-        <div class="row gap-3 mb-5">
+        <h4 class="text-light" style="text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+        0px 8px 13px rgba(0,0,0,0.1),
+        0px 18px 23px rgba(0,0,0,0.1);">Items made by <%- manufacturer.name %></h4>
+        <div class="row gap-3 my-3">
             <% if (manufacturer_items.length < 1) { %>
                 <p>No items.</p>
             <% } %>

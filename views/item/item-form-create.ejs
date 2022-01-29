@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html>
-  <%- include('../partials/head'); -%>
-  <body>
-    <%- include('../partials/topnav'); -%>
-    <div class="container">
-        <h1 class="text-center"><%= title %></h1>
+<%- include('../partials/page-style'); -%>
+<%- include('../partials/title'); -%>
     </div>
     <div class="container">
         <form method="POST" action="" enctype="multipart/form-data">
@@ -48,7 +43,7 @@
                 <label class="form-label">Category</label><br>
                     <% categories.forEach((category) => { %>
                     <input type="checkbox" name="category" class="btn-check" autocomplete="off" value="<%= category._id %>" id=<%= category._id %>>
-                    <label class="btn btn-outline-secondary" for=<%= category._id %>><%- category.name %></label>
+                    <label class="btn btn-secondary" for=<%= category._id %>><%- category.name %></label>
                     <% }) %>
             </div>
             <div class="mb-3 mx-auto">

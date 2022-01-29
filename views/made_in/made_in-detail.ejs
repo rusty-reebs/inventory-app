@@ -1,8 +1,4 @@
-<!DOCTYPE html>
-<html>
-  <%- include('../partials/head'); -%>
-  <body>
-    <%- include('../partials/topnav'); -%>
+<%- include('../partials/page-style'); -%>
     <div class="container">
         <h1 class="text-center"> 
         <a href=<%= made_in.url + "/update" %> class="btn btn-secondary">Update country info</a>
@@ -18,8 +14,10 @@
         </div>
     </div>
     <div class="container">
-        <h5>Items made in <%- made_in.name %></h5>
-        <div class="row gap-3 mb-5">
+        <h4 class="text-light" style="text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+        0px 8px 13px rgba(0,0,0,0.1),
+        0px 18px 23px rgba(0,0,0,0.1);">Items made in <%- made_in.name %></h4>
+        <div class="row gap-3 my-3">
             <% if (made_in_items.length < 1) { %>
                 <p>No items.</p>
             <% } %>
@@ -27,7 +25,7 @@
                 <div class="col-5">
                 <a href=<%= item.url %> class="text-decoration-none text-reset">
                 <div class="card h-100 shadow">
-                    <img src=<%= item.image_url %> style="max-height:10rem;object-fit:scale-down;" class="card-img-top" alt=<%- item.name %>>
+                    <img src=<%= item.image_url %> style="max-height:10rem;object-fit:scale-down;" class="card-img-top mt-3" alt=<%- item.name %>>
                     <div class="card-body">
                         <h5 class="card-title text-center"><%- item.manufacturer.name + " " + item.name %></h5>
                     </div>

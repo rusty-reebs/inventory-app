@@ -1,8 +1,4 @@
-<!DOCTYPE html>
-<html>
-  <%- include('../partials/head'); -%>
-  <body>
-    <%- include('../partials/topnav'); -%>
+<%- include('../partials/page-style'); -%>
     <div class="container">
         <h1 class="text-center"> 
         <a href=<%= category.url + "/update" %> class="btn btn-secondary">Update category info</a>
@@ -16,8 +12,10 @@
         </div>
     </div>
     <div class="container">
-        <h5>Items in category <%- category.name %></h5>
-        <div class="row gap-3 mb-5">
+        <h4 class="text-light" style="text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+        0px 8px 13px rgba(0,0,0,0.1),
+        0px 18px 23px rgba(0,0,0,0.1);">Items in category <%- category.name %></h4>
+        <div class="row gap-3 my-3">
             <% if (category_items.length < 1) { %>
                 <p>No items.</p>
             <% } %>
@@ -25,7 +23,7 @@
                 <div class="col-5">
                 <a href=<%= item.url %> class="text-decoration-none text-reset">
                 <div class="card h-100 shadow">
-                    <img src=<%= item.image_url %> style="max-height:10rem;object-fit:scale-down;" class="card-img-top" alt=<%= item.name %>>
+                    <img src=<%= item.image_url %> class="mt-3" style="max-height:10rem;object-fit:scale-down;" class="card-img-top" alt=<%= item.name %>>
                     <div class="card-body">
                         <h5 class="card-title text-center"><%- item.manufacturer.name + " " + item.name %></h5>
                     </div>
