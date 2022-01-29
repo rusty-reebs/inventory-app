@@ -3,7 +3,7 @@
     </div>
     <div class="container">
         <form method="POST" action="" enctype="multipart/form-data">
-            <div class="mb-3 mx-auto">
+            <div class="mb-3 w-50">
                 <label for="name" class="form-label">Manufacturer</label>
                 <input type="text" class="form-control" name="name" required="true" value="">
             </div>
@@ -23,7 +23,7 @@
                 <label class="form-label" for="image_url">Image</label><br>
                 <input type="file" name="image_url" required="true">
             </div>
-            <button class="btn btn-secondary" type="submit">Submit</button>
+            <button class="btn btn-secondary mb-4" type="submit">Submit</button>
         </form>
     </div>
     <% if (typeof errors != "undefined") { %>

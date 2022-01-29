@@ -3,7 +3,7 @@
     </div>
     <div class="container">
         <form method="POST" action="">
-            <div class="mb-3 mx-auto">
+            <div class="mb-3 w-50">
                 <label for="name" class="form-label">Item</label>
                 <input type="text" class="form-control" name="name" required="true" value="<%- item.name %>">
             </div>
@@ -59,7 +59,7 @@
                     <label class="btn btn-secondary" for="<%= category._id %>"><%- category.name %></label>
                     <% }) %>
             </div>
-            <button class="btn btn-secondary" type="submit">Submit</button>
+            <button class="btn btn-secondary mb-4" type="submit">Submit</button>
         </form>
     </div>
     <% if (typeof errors != "undefined") { %>
